@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+ESX = exports['es_extended']:getSharedObject()
 busyplate = {}
 busyairsus = false
 wheelsettings = {}
@@ -184,13 +184,13 @@ RegisterNetEvent("an-stancer:addstancerkit", function()
 				flags = 49,
 			}, {}, {}, function()
 				TriggerServerEvent("an-stancer:server:removestancer")
-				QBCore.Functions.Notify("Stancer Installed", "success")
+				ESX.ShowNotification("Stancer Installed", "success")
 				ClearPedTasks(playerPed)
 			end, function()
-				QBCore.Functions.Notify("Failed..", "error")
+				ESX.ShowNotification("Failed..", "error")
 			end)
 		else
-			QBCore.Functions.Notify("You are not in a vehicle.", "error")
+			ESX.ShowNotification("You are not in a vehicle.", "error")
 		end
 end)
 
@@ -334,7 +334,7 @@ RegisterNUICallback('wheelsetting', function(data, cb)
 		veh_stats[plate].wheeledit = false
 		veh_stats[plate].heightdata = ent.stancer.heightdata
 		ent:set('stancer', veh_stats[plate], true)
-		QBCore.Functions.Notify("Vehicle Wheel Data is Saved", "success")
+		ESX.ShowNotification("Vehicle Wheel Data is Saved", "success")
 	end
 	cb(true)
 end)
@@ -355,7 +355,7 @@ function OpenStancer()
 	local ent = Entity(vehicle).state
 	if busy or not ent.stancer then
 		print(ent.stancer)
-		QBCore.Functions.Notify("No stancer installed.", "error") return
+		ESX.ShowNotification("No stancer installed.", "error") return
 	end
 	local cache = ent.stancer
 	isbusy = true
@@ -388,9 +388,9 @@ function OpenStancer()
 		end)
 	else
 		if GetVehicleDoorLockStatus(vehicle ) ~= 1 then
-			QBCore.Functions.Notify("No unlocked vehicles nearby.", "error")
+			ESX.ShowNotification("No unlocked vehicles nearby.", "error")
 		else
-			QBCore.Functions.Notify("No vehicles nearby", "error")
+			ESX.ShowNotification("No vehicles nearby", "error")
 		end
 	end
 end
