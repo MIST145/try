@@ -1,9 +1,9 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+ESX = exports['es_extended']:getSharedObject()
 RegisterUsableItem = nil
 stancer = {}
 
 RegisterServerEvent("an-stancer:server:removestancer", function() 
-  local Player = QBCore.Functions.GetPlayer(source)
+  local Player = ESX.GetPlayerFromId(source)
   Player.Functions.RemoveItem("stancerkit", 1, false)
 end)
 
@@ -27,8 +27,8 @@ Citizen.CreateThread(function()
   end
 end)
 
-QBCore.Functions.CreateUseableItem("stancerkit", function(source, item)   
-  local Player = QBCore.Functions.GetPlayer(source)
+ESX.RegisterUsableItem("stancerkit", function(source, item)   
+  local Player = ESX.GetPlayerFromId(source)
   if Player.Functions.GetItemBySlot(item.slot) ~= nil then 
     TriggerClientEvent("an-stancer:addstancerkit", source) 
     local veh = GetVehiclePedIsIn(GetPlayerPed(source), false)
